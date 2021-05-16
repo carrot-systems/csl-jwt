@@ -25,7 +25,7 @@ func (j *JwtInstance) ParseToken(token string) (*Claims, error) {
 	return claims, nil
 }
 
-func (j *JwtInstance) generateJWT(session SessionDetail) (string, error) {
+func (j *JwtInstance) GenerateJWT(session SessionDetail) (string, error) {
 	expirationTime := time.Now().Add(5 * 24 * time.Hour)
 
 	claims := &Claims{
