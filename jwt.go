@@ -15,7 +15,7 @@ func (j *JwtInstance) ParseToken(token string) (*Claims, error) {
 	claims := &Claims{}
 
 	_, err := jwt.ParseWithClaims(token, claims, func(token *jwt.Token) (interface{}, error) {
-		return j.Key, nil
+		return []byte(j.Key), nil
 	})
 
 	if err != nil {
@@ -38,7 +38,7 @@ func (j *JwtInstance) GenerateJWT(session SessionDetail) (string, error) {
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	tokenString, err := token.SignedString(j.Key)
+	tokenString, err := token.SignedString([]byte(j.Key))
 	if err != nil {
 		return "", err
 	}
